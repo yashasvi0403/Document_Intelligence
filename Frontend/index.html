@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Document Intelligence • HR Assistant</title>
+
+  <!-- ✅ IMPORTANT: use absolute paths because Frontend is mounted at "/" -->
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <div class="bg">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+    <div class="grid"></div>
+  </div>
+
+  <main class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">DI</div>
+        <div class="brand-text">
+          <div class="title">ABC Company Knowledge Assistant</div>
+          <div class="subtitle">Answers to Internal Questions</div>
+        </div>
+      </div>
+      <div class="pill">
+        <span class="dot"></span>
+        <span id="apiStatus">API: Not checked</span>
+      </div>
+    </header>
+
+    <section class="card hero">
+      <div class="hero-left">
+        <h1>Get Accurate Answers from ABC Company Knowledge Base</h1>
+        <p class="muted">
+          Type your question, and we’ll retrieve the most relevant information from your uploaded HR files
+          with confidence & similarity scoring.
+        </p>
+
+        <div class="input-card">
+          <label class="label" for="question">Your Question</label>
+          <textarea
+            id="question"
+            class="textarea"
+            rows="4"
+            placeholder="Example: What does the Python screening checklist include?"
+          ></textarea>
+
+          <div class="row">
+            <button id="askBtn" class="btn primary">
+              <span class="btn-icon">✨</span>
+              Ask & Get Answer
+            </button>
+            <button id="clearBtn" class="btn ghost">Clear</button>
+          </div>
+
+          <div class="helper">
+            <span class="kbd">Tip</span>
+            Ask about your loaded files:
+            <span class="chip">compliance policy</span>
+            <span class="chip">screening checklist</span>
+            <span class="chip">rate card</span>
+          </div>
+
+          <div id="errorBox" class="alert hidden"></div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="mini-card">
+          <div class="mini-title">What you'll see</div>
+
+          <div class="mini-line">
+            <span class="mini-key">Answer:</span>
+            Clear response extracted from ABC Company documents
+          </div>
+
+          <div class="mini-line">
+            <span class="mini-key">Confidence:</span>
+            Reliability level of the retrieved information
+          </div>
+
+          <div class="mini-line">
+            <span class="mini-key">Similarity:</span>
+            Relevance score from semantic search
+          </div>
+
+          <div class="mini-line">
+            <span class="mini-key">Source:</span>
+            Original document reference
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="muted small">© Document Intelligence • Demo UI</div>
+      <div class="muted small">Powered by FastAPI + Vector Search</div>
+    </footer>
+  </main>
+
+  <!-- ✅ IMPORTANT: use absolute path -->
+  <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Answer • Document Intelligence</title>
+
+  <!-- IMPORTANT: Use absolute path -->
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <div class="bg">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+    <div class="grid"></div>
+  </div>
+
+  <main class="wrap center-page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">DI</div>
+        <div class="brand-text">
+          <div class="title">ABC Company Answer Center</div>
+          <div class="subtitle">Document-Based Response</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="backBtn" class="btn ghost">← Ask Another</button>
+        <button id="copyBtn" class="btn primary">
+          <span class="btn-icon">📋</span> Copy Answer
+        </button>
+      </div>
+    </header>
+
+    <section class="card result result-centered">
+      <div class="result-head">
+        <div>
+          <h2 class="result-title">Result</h2>
+          <p class="muted">
+            Response generated from ABC Company knowledge base.
+          </p>
+        </div>
+
+        <div class="score-cards">
+          <div class="score">
+            <div class="score-label">Confidence</div>
+            <div id="confidence" class="score-value">—</div>
+          </div>
+
+          <div class="score">
+            <div class="score-label">Similarity</div>
+            <div id="similarity" class="score-value">—</div>
+          </div>
+
+          <div class="score">
+            <div class="score-label">Source</div>
+            <div id="sourceDocs" class="score-value smalltext">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-box">
+          <div class="qa-label">Your Question</div>
+          <div id="questionView" class="qa-text">—</div>
+        </div>
+
+        <div class="qa-box answerbox big-answer">
+          <div class="qa-label">Answer</div>
+          <div id="answerView" class="qa-text prewrap big-text">—</div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="footer">
+      <div class="muted small">ABC Company Knowledge Assistant</div>
+      <div class="muted small">Semantic Search Powered</div>
+    </footer>
+  </main>
+
+  <!-- IMPORTANT: Use absolute path -->
+  <script src="/script.js"></script>
+
+</body>
+</html>
