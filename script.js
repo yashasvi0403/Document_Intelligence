@@ -1,10 +1,18 @@
 // ============================
-// Frontend/script.js (Render-ready)
-// Works when frontend + backend are served from the SAME Render URL
+// script.js (GitHub Pages + Remote Backend ready)
+// Works when frontend is on GitHub Pages and backend is on HuggingFace/Render/etc.
 // ============================
 
-// Storage key used in sessionStorage
 const STORAGE_KEY = "di_last_result";
+
+/**
+ * ✅ SET YOUR BACKEND URL HERE
+ * Example (Hugging Face Space):
+ *   https://your-space-name.hf.space
+ * Example (Render):
+ *   https://your-service.onrender.com
+ */
+const BACKEND_BASE = "https://YOUR_BACKEND_DOMAIN_HERE"; // <-- CHANGE THIS
 
 function $(id) { return document.getElementById(id); }
 
@@ -23,10 +31,17 @@ function setStatus(text, ok) {
     : "0 0 0 5px rgba(245,158,11,0.12)";
 }
 
+function apiUrl(path) {
+  // Ensure no double slashes
+  const base = (BACKEND_BASE || "").replace(/\/+$/, "");
+  const p = String(path || "").startsWith("/") ? path : `/${path}`;
+  return `${base}${p}`;
+}
+
 async function pingAPI() {
-  // If server is up, /openapi.json will respond
+  // For remote backend, ping backend openapi
   try {
-    const res = await fetch("/openapi.json", { method: "GET" });
+    const res = await fetch(apiUrl("/openapi.json"), { method: "GET" });
     if (res.ok) setStatus("API: Online", true);
     else setStatus("API: Issue", false);
   } catch {
@@ -49,13 +64,12 @@ function clearError() {
 }
 
 async function askQuestion(question) {
-  const res = await fetch("/ask-recruiter", {
+  const res = await fetch(apiUrl("/ask-recruiter"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ question })
   });
 
-  // Handle non-JSON errors safely
   const text = await res.text();
   let data;
   try {
@@ -119,12 +133,12 @@ async function initIndex() {
     try {
       const data = await askQuestion(q);
 
-      // Save full response + question for the answer page
+      // Save result for answer page
       const payload = { question: q, ...data };
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
 
-      // Go to answer page (absolute path for Render safety)
-      window.location.href = "/answer.html";
+      // ✅ GitHub Pages safe navigation (relative)
+      window.location.href = "answer.html";
     } catch (err) {
       showError("Error: " + (err?.message || "Something went wrong."));
     } finally {
@@ -142,7 +156,8 @@ function initAnswer() {
   const copyBtn = $("copyBtn");
 
   backBtn?.addEventListener("click", () => {
-    window.location.href = "/index.html";
+    // ✅ GitHub Pages safe navigation (relative)
+    window.location.href = "index.html";
   });
 
   copyBtn?.addEventListener("click", async () => {
@@ -158,7 +173,6 @@ function initAnswer() {
 
   const raw = sessionStorage.getItem(STORAGE_KEY);
   if (!raw) {
-    // If user directly opened answer.html
     if ($("questionView")) $("questionView").textContent = "No question found. Please go back and ask a question.";
     if ($("answerView")) $("answerView").textContent = "—";
     if ($("confidence")) $("confidence").textContent = "—";
