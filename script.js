@@ -12,7 +12,7 @@ const STORAGE_KEY = "di_last_result";
  * Example (Render):
  *   https://your-service.onrender.com
  */
-const BACKEND_BASE = "https://YOUR_BACKEND_DOMAIN_HERE"; // <-- CHANGE THIS
+const BACKEND_BASE = "https://yashasvi0409-document-intelligence.hf.space";
 
 function $(id) { return document.getElementById(id); }
 
